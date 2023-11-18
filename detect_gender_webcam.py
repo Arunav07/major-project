@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import os
 import cvlib as cv
-                    
+
 # load model
 model = load_model('gender_detection.model')
 
@@ -50,6 +50,7 @@ while webcam.isOpened():
 
         # get label with max accuracy
         idx = np.argmax(conf)
+
         label = classes[idx]
 
         label = "{}: {:.2f}%".format(label, conf[idx] * 100)

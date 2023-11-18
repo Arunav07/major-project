@@ -15,7 +15,6 @@ import streamlit as st
 import time
 from utils import load_data, split_data, create_model
 
-
 st.set_page_config(layout="wide", page_icon=":art:", page_title="Gender Classification")
 
 # Load face detection model
@@ -200,6 +199,10 @@ my_bar.empty()
 
 st.divider()
 
+if(os.path.exists("face-confusion-matrix.png")):
+    with st.expander(label="Face Model Confusion Matrix"):
+        st.image("face-confusion-matrix.png")
+
 global audio_model
 
 webcam = cv2.VideoCapture(0)
@@ -251,6 +254,7 @@ while webcam.isOpened():
         face_idx = np.argmax(face_conf)
         face_label = video_classes[face_idx]
         face_label = "{}: {:.2f}%".format(face_label, face_conf[face_idx] * 100)
+        
 
         Y = startY - 10 if startY - 10 > 10 else startY + 10
 
